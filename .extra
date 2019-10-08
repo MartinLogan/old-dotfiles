@@ -1,0 +1,41 @@
+ source ~/git-completion.bash
+
+export JAVA_HOME=$(/usr/libexec/java_home)
+
+##AWS ClI completion
+complete -C /usr/local/bin/aws_completer aws
+
+#https alias
+alias https='http --default-scheme=https'
+
+#ssh-agent
+if [ -z "$SSH_AUTH_SOCK" ] ; then
+  eval `ssh-agent -s`
+fi
+ssh-add ~/.ssh/id_rsa 2> /dev/null
+ssh-add ~/.ssh/3cSharedLab.pem 2> /dev/null
+ssh-add ~/.ssh/3cShared.pem 2> /dev/null
+ssh-add ~/.ssh/3cSharedQC.pem 2> /dev/null
+
+# Aliases
+#docker stuff
+alias dmenv='eval "$(docker-machine env default)"'
+
+#git stuff
+alias gprune="git branch --merged master | grep -v 'master$' | xargs git branch -d"
+alias gitup="git checkout master && git pull origin master --rebase && gprune"
+
+#okta stuff
+alias okta-a="okta-aws-credentials -u $USER -w --account_nick "
+
+#gpg stuff
+alias gpg2=gpg
+
+#https for httpie
+alias https='http --default-scheme=https'
+
+# alias for gitlab
+# gitlab="!open https://gitlab.frg.tech/$(git repo-user)/$(git repo-name)/pipelines#$(git branch-current) #"
+
+# Git Updates
+alias gitup="git checkout master;git pull --rebase"
